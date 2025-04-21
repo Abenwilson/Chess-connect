@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "876463256323",
+    "project_id": "clicks-57eb7",
+    "storage_bucket": "clicks-57eb7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876463256323:android:a779b78c76e91932d4ef36",
+        "android_client_info": {
+          "package_name": "com.example.photographers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoCP_0FuY47rUSebFj2VvbB-GrADlD-ns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
