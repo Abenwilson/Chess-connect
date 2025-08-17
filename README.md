@@ -1,5 +1,6 @@
-![Home](assets/images/home.jpg)
-![Chess](assets/images/chess.jpg)
-![Profile](assets/images/profile.jpg)
-![Users](assets/images/users.jpg)
+<p align="center">
+  <img src="assets/images/home.jpg" alt="Home" width="250"/>
+  <img src="assets/images/chess.jpg" alt="Chess" width="250"/>
+  <img src="assets/images/profile.jpg" alt="Profile" width="250"/>
+</p>
 
