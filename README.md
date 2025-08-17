@@ -5,5 +5,4 @@
   &nbsp;&nbsp;&nbsp;
   <img src="assets/images/profile.jpg" alt="Profile" width="250"/>
 </p>
-<h3>This application consist more features</h3>
 
