@@ -29,13 +29,13 @@ class _ProfileState extends State<Profile> {
   late final authcubit = context.read<AuthCubit>();
   late final profilecubits = context.read<ProfileCubits>();
 
-// current user
+  // current user
   late AppUser? currentUser = authcubit.currentUser;
 
   int postCount = 0;
 
   late AppUser? currentuser = authcubit.currentUser;
-// load profile page  this part connecting next page
+  // load profile page  this part connecting next page
 
   @override
   void initState() {
@@ -80,7 +80,7 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-//BUILD UI
+  //BUILD UI
   @override
   Widget build(BuildContext context) {
     // is own post
@@ -110,35 +110,37 @@ class _ProfileState extends State<Profile> {
                 if (isOwnPost)
                   //edit porfile button
                   IconButton(
-                      onPressed: () async {
-                        await Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return EditProfile(user: user);
-                        }));
-                        // Ensure updated data is fetched
-                        setState(() {
-                          profilecubits.fetchUserProfile(widget.uid);
-                        });
-                      },
-                      icon: Icon(Icons.edit))
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return EditProfile(user: user);
+                          },
+                        ),
+                      );
+                      // Ensure updated data is fetched
+                      setState(() {
+                        profilecubits.fetchUserProfile(widget.uid);
+                      });
+                    },
+                    icon: Icon(Icons.edit),
+                  ),
               ],
             ),
 
             body: ListView(
               children: [
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Center(
                   child: Text(
                     user.email,
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary),
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
+                const SizedBox(height: 50),
                 Center(
                   child: Container(
                     height: 120,
@@ -147,38 +149,25 @@ class _ProfileState extends State<Profile> {
                       color: Theme.of(context).colorScheme.secondary,
                       shape: BoxShape.circle,
                     ),
-                    child: CachedNetworkImage(
-                      imageUrl: user.profileImagUrl,
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          Icon(Icons.person, size: 60),
-                      fit: BoxFit.cover,
-                      imageBuilder: (context, ImageProvider) => Container(
-                        height: 120,
-                        width: 120,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: ImageProvider, fit: BoxFit.cover)),
-                      ),
-                    ),
                   ),
                 ),
-                SizedBox(
-                  height: 25,
-                ),
+                SizedBox(height: 25),
                 // profile stats
                 ProfileStats(
                   postCount: postCount,
                   followersCount: user.followers.length,
                   followingCount: user.following.length,
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FollowerPage(
-                              followers: user.followers,
-                              following: user.following))),
+                  onTap:
+                      () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => FollowerPage(
+                                followers: user.followers,
+                                following: user.following,
+                              ),
+                        ),
+                      ),
                 ),
                 // follow button
                 if (!isOwnPost)
@@ -187,9 +176,7 @@ class _ProfileState extends State<Profile> {
                     isFollowing: user.followers.contains(currentUser!.uid),
                   ),
 
-                SizedBox(
-                  height: 25,
-                ),
+                SizedBox(height: 25),
                 // bio box
                 Padding(
                   padding: const EdgeInsets.only(left: 25.0),
@@ -198,24 +185,18 @@ class _ProfileState extends State<Profile> {
                       Text(
                         "Bio",
                         style: TextStyle(
-                            color:
-                                Theme.of(context).colorScheme.inversePrimary),
-                      )
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.all(15),
-                  child: BioBox(
-                    text: user.bio,
-                  ),
+                  child: BioBox(text: user.bio),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 //profession name
                 Row(
                   children: [
@@ -224,29 +205,21 @@ class _ProfileState extends State<Profile> {
                       child: Text(
                         "Profession",
                         style: TextStyle(
-                            color:
-                                Theme.of(context).colorScheme.inversePrimary),
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: ProfBox(text: user.profession),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
+                SizedBox(height: 20),
 
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 //post
                 Padding(
                   padding: const EdgeInsets.only(left: 25.0),
@@ -255,9 +228,9 @@ class _ProfileState extends State<Profile> {
                       Text(
                         "Post",
                         style: TextStyle(
-                            color:
-                                Theme.of(context).colorScheme.inversePrimary),
-                      )
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -266,177 +239,207 @@ class _ProfileState extends State<Profile> {
                   // list of posts from this user
                 ),
                 BlocConsumer<PostCubits, PostStates>(
-                    listener: (context, state) {
-                  if (state is ProfileLoaded) {
-                    setState(() {}); // Forces UI update
-                  }
-                }, builder: (context, state) {
-                  // post Loaded
-                  if (state is PostLoaded) {
-                    // filter post by user id
-                    final userPosts = state.posts
-                        .where((post) => post.userId == widget.uid)
-                        .toList();
-                    // Move postCount inside setState
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      setState(() {
-                        postCount = userPosts.length;
+                  listener: (context, state) {
+                    if (state is ProfileLoaded) {
+                      setState(() {}); // Forces UI update
+                    }
+                  },
+                  builder: (context, state) {
+                    // post Loaded
+                    if (state is PostLoaded) {
+                      // filter post by user id
+                      final userPosts =
+                          state.posts
+                              .where((post) => post.userId == widget.uid)
+                              .toList();
+                      // Move postCount inside setState
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        setState(() {
+                          postCount = userPosts.length;
+                        });
                       });
-                    });
 
-                    return ListView.builder(
-                      itemCount: postCount,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final authState = context.read<AuthCubit>().state;
+                      return ListView.builder(
+                        itemCount: postCount,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          final authState = context.read<AuthCubit>().state;
 
-                        String? currentUserId;
-                        if (authState is Authenticated) {
-                          currentUserId = authState.user.uid;
-                        }
+                          String? currentUserId;
+                          if (authState is Authenticated) {
+                            currentUserId = authState.user.uid;
+                          }
 
-                        final post = userPosts[index];
+                          final post = userPosts[index];
 
-                        return Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade300,
-                                blurRadius: 6,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    timeago.format(post.timeStamp),
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  if (post.userId == currentUserId)
-                                    IconButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                            title: const Text("Delete Post"),
-                                            content:
-                                                const Text("Are you sure ?"),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () =>
-                                                    Navigator.of(context).pop(),
-                                                child: const Text("Cancel"),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  context
-                                                      .read<PostCubits>()
-                                                      .deletePost(post.id);
-                                                  Navigator.of(context).pop();
-                                                  // Refresh profile posts after deletion
-                                                  context
-                                                      .read<PostCubits>()
-                                                      .fetchAllposts();
-                                                },
-                                                child: const Text(
-                                                  "Delete",
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                      icon: const Icon(Icons.delete,
-                                          color: Colors.grey),
-                                    ),
-                                ],
-                              ),
-                              const SizedBox(height: 25),
-
-                              // Post Image
-                              CachedNetworkImage(
-                                imageUrl: post.imageUrl,
-                                height: 400,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) => const SizedBox(
-                                  height: 400,
-                                  child: Center(
-                                      child: CircularProgressIndicator()),
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.shade300,
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 3),
                                 ),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Row(
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   children: [
-                                    // Post Text
-                                    if (post.text.isNotEmpty) ...[
-                                      const SizedBox(height: 10),
-                                      Text(post.text),
-                                    ],
-
-                                    Spacer(),
-                                    // Likes
-                                    Icon(Icons.favorite_sharp,
-                                        color: Colors.grey, size: 18),
-                                    SizedBox(width: 5),
                                     Text(
-                                      post.likes.length
-                                          .toString(), // Display likes count
+                                      timeago.format(post.timeStamp),
                                       style: TextStyle(
-                                          fontSize: 14, color: Colors.black),
+                                        color: Colors.grey[600],
+                                        fontSize: 12,
+                                      ),
                                     ),
-                                    SizedBox(width: 15),
-
-                                    // Comments
-                                    Icon(Icons.comment,
-                                        color: Colors.grey, size: 18),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      post.comments.length
-                                          .toString(), // Display comments count
-                                      style: TextStyle(
-                                          fontSize: 14, color: Colors.black),
-                                    ),
+                                    const Spacer(),
+                                    if (post.userId == currentUserId)
+                                      IconButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder:
+                                                (context) => AlertDialog(
+                                                  title: const Text(
+                                                    "Delete Post",
+                                                  ),
+                                                  content: const Text(
+                                                    "Are you sure ?",
+                                                  ),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed:
+                                                          () =>
+                                                              Navigator.of(
+                                                                context,
+                                                              ).pop(),
+                                                      child: const Text(
+                                                        "Cancel",
+                                                      ),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        context
+                                                            .read<PostCubits>()
+                                                            .deletePost(
+                                                              post.id,
+                                                            );
+                                                        Navigator.of(
+                                                          context,
+                                                        ).pop();
+                                                        // Refresh profile posts after deletion
+                                                        context
+                                                            .read<PostCubits>()
+                                                            .fetchAllposts();
+                                                      },
+                                                      child: const Text(
+                                                        "Delete",
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                          );
+                                        },
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
                                   ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  }
-                  // posts loading
-                  else if (state is PostLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text("no posts.."),
-                    );
-                  }
+                                const SizedBox(height: 25),
 
-                  // post load
-                })
+                                // Post Image
+                                CachedNetworkImage(
+                                  imageUrl: post.imageUrl,
+                                  height: 400,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  placeholder:
+                                      (context, url) => const SizedBox(
+                                        height: 400,
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      ),
+                                  errorWidget:
+                                      (context, url, error) =>
+                                          const Icon(Icons.error),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      // Post Text
+                                      if (post.text.isNotEmpty) ...[
+                                        const SizedBox(height: 10),
+                                        Text(post.text),
+                                      ],
+
+                                      Spacer(),
+                                      // Likes
+                                      Icon(
+                                        Icons.favorite_sharp,
+                                        color: Colors.grey,
+                                        size: 18,
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        post.likes.length
+                                            .toString(), // Display likes count
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      SizedBox(width: 15),
+
+                                      // Comments
+                                      Icon(
+                                        Icons.comment,
+                                        color: Colors.grey,
+                                        size: 18,
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        post.comments.length
+                                            .toString(), // Display comments count
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    }
+                    // posts loading
+                    else if (state is PostLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return const Center(child: Text("no posts.."));
+                    }
+
+                    // post load
+                  },
+                ),
               ],
             ),
           );
@@ -444,9 +447,7 @@ class _ProfileState extends State<Profile> {
           //scafold
         } else if (state is ProfileLoading) {
           return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
+            body: Center(child: CircularProgressIndicator()),
           );
         } else {
           return Text("no profile found");

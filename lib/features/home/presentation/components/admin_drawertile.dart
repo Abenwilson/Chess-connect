@@ -133,14 +133,14 @@ class _AdminDrawertileState extends State<AdminDrawertile> {
 
           // settings
 
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-            child: MyDrawertile(
-                title: "S E T T I N G S", icon: Icons.settings, ontap: () {}),
-          ),
-          SizedBox(
-            height: 10,
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+          //   child: MyDrawertile(
+          //       title: "S E T T I N G S", icon: Icons.settings, ontap: () {}),
+          // ),
+          // SizedBox(
+          //   height: 10,
+          // ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
             child: MyDrawertile(
